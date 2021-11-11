@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="img">
+        <img src="{{image}}" alt="{{ title }}">
+    </div>
+    <div class="data">
+        <h4>{{ title }}</h4>
+        <div><span>{{ language | slice:3:5}}</span></div>
+        <span>{{ uploaderName }}</span>
+        <div class="views"><span>Nombre de vue : {{0}}</span></div>
+        <div class="date">{{duration * 1000 | date:'hh:mm:ss'}}</div>
+    </div>
+</div>
