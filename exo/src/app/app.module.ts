@@ -13,9 +13,9 @@ const appRoutes : Routes = [
   
   {path: 'video',component: VideoListComponent},
   {path: 'video/view/:id',component: SingleVideoComponent},
-  {path: '',component: VideoListComponent},
-  //{path: '', redirectTo:'video', pathMatch:'full'},
-  //{path: '**', redirectTo:'video'},
+  
+  {path: '', redirectTo:'video', pathMatch:'full'},
+  {path: '**', redirectTo:'video'},
   
 ];
 

@@ -2,11 +2,15 @@
     <div class="img">
         <img src="{{image}}" alt="{{ title }}">
     </div>
+    <div class="head">
+       <div ><span class="lang">{{ language | slice:3:5}}</span></div>
+       <div ><span class="views">{{0}}</span></div> 
+    </div>
+    
     <div class="data">
         <h4>{{ title }}</h4>
-        <div><span>{{ language | slice:3:5}}</span></div>
-        <span>{{ uploaderName }}</span>
-        <div class="views"><span>Nombre de vue : {{0}}</span></div>
+        <h5>{{ uploaderName }}</h5>
+        
         <div class="date">{{duration * 1000 | date:'hh:mm:ss'}}</div>
     </div>
 </div>

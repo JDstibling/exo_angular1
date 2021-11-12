@@ -35,14 +35,12 @@ export class VideoService implements OnInit{
 
   apiURL = 'https://api.kinomap.com/v3/videos/coaching/search/elastic?appToken=5cphz6MXH1Uzr8zDsJ6uVSYS9aOzMXXDio0dclN6QwFDVlZc7h84qDZNG2ttdAeLvhxlc7jCNGe454PmNiDV8cdruQTHW388mCXgexzC7UoydgkWsLMMmDun&limit=15&page=1'
 
-  // appareilSubject va emmettre un tableau de type any pour transmetre le tableau des cards
-  //videoSubject= new Subject<Video[]>();
 
   data: any;
   card: any;
 
 getAll() {
-    this.HttpClient.get<any>(
+    this.HttpClient.get<Video>(
       this.apiURL,
        {observe: 'response'}
    )
