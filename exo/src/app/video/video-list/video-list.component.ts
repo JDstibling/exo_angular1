@@ -18,7 +18,6 @@ export class VideoListComponent implements OnInit {
 
   onFetch() {
     this.data = this.videoService.displayedData
-    //this.data = this.videoService.card                          //fonctionne
     for(let i = 0; i < this.data.length; i++){
       this.card.push(this.data[i])
     }

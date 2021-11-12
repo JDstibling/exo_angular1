@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { VideoService } from '../../services/video.service';
 
 @Component({
   selector: 'app-pagination',
@@ -13,13 +14,9 @@ export class PaginationComponent implements OnInit {
   @Output() changePage: EventEmitter<number> = new EventEmitter<number>();
   private _currentPage: number = 1;
 
-  constructor() { }
+  constructor(private videoService: VideoService) { }
 
-  ngOnInit(): void {
-    console.log(this.currentPage);
-    
-  }
-
+  ngOnInit(): void {}
 
   // propriété émise vers video-list
   get currentPage(): number {
@@ -27,23 +24,36 @@ export class PaginationComponent implements OnInit {
   }
 
   set currentPage(page) {
-    this.currentPage = page;
+    this._currentPage = page;
     this.changePage.emit(this.currentPage);
+    
   }
 
   onFirstPage(): void {
-    this.currentPage = 1;
+    this._currentPage = 1;
+    this.videoService.onPageChange(this._currentPage);
+    //console.log(this.currentPage);
   }
 
   onLastPage(): void {
-    this.currentPage = this.allPagesNumber;
+    this._currentPage = this.allPagesNumber;
+    this.videoService.onPageChange(this._currentPage);
+    //console.log(this.currentPage);
   }
 
   onNextPage(): void {
-    this.currentPage += 1;
+    this._currentPage += 1;
+    //console.log(this.currentPage);
+    this.videoService.onPageChange(this._currentPage);
   }
 
   onPreviousPage(): void {
-    this.currentPage -= 1;
+    this._currentPage -= 1;
+    this.videoService.onPageChange(this._currentPage);
+    //console.log(this.currentPage);
+  }
+
+  onPageChange(currentPage: number): void {
+    this.videoService.onPageChange(this._currentPage);
   }
 }

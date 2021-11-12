@@ -22,6 +22,7 @@ export class VideoService implements OnInit{
 
   itemsPerPage: number = 4;
   allPages!: number;
+  currentPage: number = 1;
 
 getAll() {
     this.HttpClient.get<Video>(
@@ -40,12 +41,19 @@ getAll() {
      });
   }
 
-  onPageChange(page: number = 1): void {
+  onPageChange(currentPage: number = 1): void {
     //méthode déclanché à chaque fois qu'elle reçoit l'événeemnt du composant de pagination
-    const startItem = (page - 1) * this.itemsPerPage;
-    const endItem = page * this.itemsPerPage;
+    const startItem = (currentPage - 1) * this.itemsPerPage;
+    console.log(startItem);
+    
+    const endItem = currentPage * this.itemsPerPage;
+    console.log(endItem);
+
+
     // portion du tableau d'origine
     this.displayedData = this.card.slice(startItem, endItem);
+    console.log(this.displayedData);
+    
   }
 
   getData() {
