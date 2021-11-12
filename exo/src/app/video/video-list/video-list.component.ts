@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../services/video.service';
 
 @Component({
@@ -9,24 +8,30 @@ import { VideoService } from '../../services/video.service';
 })
 export class VideoListComponent implements OnInit {
 
+  itemsPerPage: number = this.videoService.itemsPerPage;
+  allPages: number = this.videoService.allPages;
   data : any;
   card: any[] = [];
+  
 
-  constructor(private videoService: VideoService) { }
-
-  ngOnInit(): void {
-    this.videoService.getAll();
-    //this.onFetch();
-    
-    
-  }
+  constructor(private videoService: VideoService) {}
 
   onFetch() {
-    this.data = this.videoService.card
+    this.data = this.videoService.displayedData
+    //this.data = this.videoService.card                          //fonctionne
     for(let i = 0; i < this.data.length; i++){
       this.card.push(this.data[i])
     }
     //console.log(this.card);
    }
+
+  ngOnInit(): void {
+    this.videoService.getAll();
+    //this.onFetch();
+  }
+
+  onPageChange(event: number){
+    this.videoService.onPageChange(event);
+  }
 
 }

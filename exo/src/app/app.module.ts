@@ -8,6 +8,7 @@ import { SingleVideoComponent } from './video/single-video/single-video.componen
 import { VideoService } from './services/video.service';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginationComponent } from './video/pagination/pagination.component';
 
 const appRoutes : Routes = [
   
@@ -23,7 +24,8 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     VideoListComponent,
-    SingleVideoComponent
+    SingleVideoComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,17 @@
 
-
 <div class="main">
-    <app-single-video
-    *ngFor="let i of card"
-    [title]="i.data.name"
-    [image]="i.data.thumbnails.medium"
-    [uploaderName]="i.data.author.username "
-    [duration]="i.data.duration"
-    [language]="i.data.lang.code"
-    [data]="data"></app-single-video>
+    <div class="cards">
+        <app-single-video
+        *ngFor="let i of card"
+        [title]="i.data.name"
+        [image]="i.data.thumbnails.medium"
+        [uploaderName]="i.data.author.username "
+        [duration]="i.data.duration"
+        [language]="i.data.lang.code"
+        [data]="data"></app-single-video>
+    </div>
+    <app-pagination [allPagesNumber]="allPages" (changePage)="onPageChange($event)"></app-pagination>
+
 </div>
 
 
