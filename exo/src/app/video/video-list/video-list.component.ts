@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../services/video.service';
+//import { Observable } from 'rxjs';
+import { Observable, interval} from 'rxjs';
+import { Video } from 'src/app/models/Video.model';
 
 @Component({
   selector: 'app-video-list',
@@ -12,25 +15,50 @@ export class VideoListComponent implements OnInit {
   allPages: number = this.videoService.allPages;
   data : any;
   card: any[] = [];
+  secondes = 0;
+ 
+  dataSubject: any;
   
 
-  constructor(private videoService: VideoService) {}
+  constructor(private videoService: VideoService) {
+    this.onFetch();
+  }
 
   onFetch() {
-    this.data = this.videoService.displayedData
-    for(let i = 0; i < this.data.length; i++){
-      this.card.push(this.data[i])
-    }
-    //console.log(this.card);
+    this.videoService.getAll()
+    .subscribe(
+            (response: Video) => {
+            //console.log(response);
+            this.data = response;
+            // this.data = {
+            //   image: response.image,
+            //   title: response.title,
+            //   language: response.language,
+            //   uploaderName: response.uploaderName,
+            //   duration: response.duration
+            // }
+
+            console.log(this.data);
+            
+            this.getData();
+          },
+          (error: string) => {
+            console.log('error : ' + error);
+            
+          });
    }
 
-  ngOnInit(): void {
-    this.videoService.getAll();
-    //this.onFetch();
+
+   getData() {
+    this.card = this.data.data;
+    //console.log(this.data.data);
+    
+    
   }
 
-  onPageChange(event: number){
-    this.videoService.onPageChange(event);
+  ngOnInit() {
+
   }
+
 
 }

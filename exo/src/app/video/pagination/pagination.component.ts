@@ -31,29 +31,29 @@ export class PaginationComponent implements OnInit {
 
   onFirstPage(): void {
     this._currentPage = 1;
-    this.videoService.onPageChange(this._currentPage);
+    //this.videoService.onPageChange(this._currentPage);
     //console.log(this.currentPage);
   }
 
   onLastPage(): void {
     this._currentPage = this.allPagesNumber;
-    this.videoService.onPageChange(this._currentPage);
+    //this.videoService.onPageChange(this._currentPage);
     //console.log(this.currentPage);
   }
 
   onNextPage(): void {
     this._currentPage += 1;
     //console.log(this.currentPage);
-    this.videoService.onPageChange(this._currentPage);
+    //this.videoService.onPageChange(this._currentPage);
   }
 
   onPreviousPage(): void {
     this._currentPage -= 1;
-    this.videoService.onPageChange(this._currentPage);
+    //this.videoService.onPageChange(this._currentPage);
     //console.log(this.currentPage);
   }
 
   onPageChange(currentPage: number): void {
-    this.videoService.onPageChange(this._currentPage);
+    //this.videoService.onPageChange(this._currentPage);
   }
 }

@@ -10,7 +10,7 @@ export class SingleVideoComponent implements OnInit {
 
 
   @Input() data: Array<any> = [];
-  img: any[] = [];
+  //img: any[] = [];
 
   @Input() image: string = '';
   @Input() title: string = '';
