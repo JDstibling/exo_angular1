@@ -1,0 +1,12 @@
+.pagination{
+    display: flex;
+    width: 600px;
+    .item{
+        border: solid;
+        margin: 1rem;
+        width: 60px;
+        text-align: center;
+        background-color: aqua;
+        cursor: pointer;
+    }
+}

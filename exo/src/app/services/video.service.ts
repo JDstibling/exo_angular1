@@ -1,35 +1,20 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Video } from '../models/Video.model';
-
 import { environment } from '../../environments/environment';
-import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-
-
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoService{
 
- 
-  
-  data: any = [];
-  card: any;
+  perPage: number = 20;
 
+  constructor(private Http: HttpClient) { }
 
-  itemsPerPage: number = 4;
-  allPages!: number;
-  currentPage: number = 1;
-
-
-
-  getAll(){
-    return this.Http.get<Video>(environment.api.training);
+  getAll(currentPage:number){
+    // return this.Http.get<Video>(environment.api.training + '&limit=' + this.perPage + '&page=' + currentPage);
+    return this.Http.get<any>(environment.api.training + '&limit=' + this.perPage + '&page=' + currentPage);
   }
-
-  constructor(private Http: HttpClient) {
-   }
 
 }

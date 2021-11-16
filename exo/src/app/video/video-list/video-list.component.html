@@ -2,18 +2,16 @@
 <div class="main">
     <div class="cards">
         <app-single-video
-        *ngFor="let i of card"
-        [title]="i.data.name"
-        [image]="i.data.thumbnails.medium"
-        [uploaderName]="i.data.author.username "
-        [duration]="i.data.duration"
-        [language]="i.data.lang.code"
-        [data]="data"></app-single-video>
+            *ngFor="let item of data"
+            [title]="item.data.name"
+            [image]="item.data.thumbnails.medium"
+            [uploaderName]="item.data.author.username"
+            [duration]="item.data.duration"
+            [language]="item.data.lang.code"
+            [data]="data">
+        </app-single-video>
     </div>
-    <app-pagination></app-pagination>
+    <h1>{{ currentPage }}</h1>
+    <app-pagination [currentPage]="currentPage" [lastPage]="lastPage" (pageChange)="changePage($event)"></app-pagination>
 
 </div>
-
-<button (click)="onFetch()">chargement</button>
-
-

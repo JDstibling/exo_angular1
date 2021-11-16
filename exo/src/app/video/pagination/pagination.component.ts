@@ -1,59 +1,43 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { VideoService } from '../../services/video.service';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 
 @Component({
-  selector: 'app-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss']
+  selector: "app-pagination",
+  templateUrl: "./pagination.component.html",
+  styleUrls: ["./pagination.component.scss"],
 })
-export class PaginationComponent implements OnInit {
-  @Input() itemsPerPage: number = 0;
-  @Input() itemsNumber: number = 0;
-  @Input() allPagesNumber: number = 0;
-  // utilisation de EventEmitter pour émettre des événements perso et les sauvegarder et modifier la valeur directement
-  @Output() changePage: EventEmitter<number> = new EventEmitter<number>();
-  private _currentPage: number = 1;
+export class PaginationComponent {
+  @Output() pageChange = new EventEmitter();
 
-  constructor(private videoService: VideoService) { }
+  @Input() currentPage: number = 0;
+  @Input() lastPage: number = 0;
 
-  ngOnInit(): void {}
+  constructor() {}
 
-  // propriété émise vers video-list
-  get currentPage(): number {
-    return this._currentPage;
-  }
+  changePage(type :String) {
+    let page = this.currentPage;
 
-  set currentPage(page) {
-    this._currentPage = page;
-    this.changePage.emit(this.currentPage);
+    switch (type) {
+      case 'First':
+        page = 1;
+        break;
+      case 'Prev':
+          page <= 1 ? page = 1 : page--;
+        break;
+      case 'Next':
+        page >= this.lastPage ? page = this.lastPage : page++;
+        break;
+      case 'Last':
+          page = this.lastPage;
+        break;
+      default:
+        break;
+    }  
     
-  }
-
-  onFirstPage(): void {
-    this._currentPage = 1;
-    //this.videoService.onPageChange(this._currentPage);
-    //console.log(this.currentPage);
-  }
-
-  onLastPage(): void {
-    this._currentPage = this.allPagesNumber;
-    //this.videoService.onPageChange(this._currentPage);
-    //console.log(this.currentPage);
-  }
-
-  onNextPage(): void {
-    this._currentPage += 1;
-    //console.log(this.currentPage);
-    //this.videoService.onPageChange(this._currentPage);
-  }
-
-  onPreviousPage(): void {
-    this._currentPage -= 1;
-    //this.videoService.onPageChange(this._currentPage);
-    //console.log(this.currentPage);
-  }
-
-  onPageChange(currentPage: number): void {
-    //this.videoService.onPageChange(this._currentPage);
+    this.pageChange.emit(page);
   }
 }

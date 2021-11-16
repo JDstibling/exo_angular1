@@ -1,15 +1,15 @@
 <div class="pagination">
-    <div (click)="onFirstPage()">
+    <div class="item"  (click)="changePage('First')">
       First
     </div>
-    <div (click)="onPreviousPage()">
+    <div class="item" (click)="changePage('Prev')">
       Previous
     </div>
-   
-    <div (click)="onNextPage()" style="border: solid;">
+    <div class="item" (click)="changePage('Next')">
       Next
     </div>
-    <div (click)="onLastPage()" >
+    <div class="item" (click)="changePage('Last')">
       Last
     </div>
+    <div class="test"><button>qsdqsdqsd</button></div>
   </div>

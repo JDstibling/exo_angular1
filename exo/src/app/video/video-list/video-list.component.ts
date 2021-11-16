@@ -1,64 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { VideoService } from '../../services/video.service';
-//import { Observable } from 'rxjs';
-import { Observable, interval} from 'rxjs';
 import { Video } from 'src/app/models/Video.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
   styleUrls: ['./video-list.component.scss']
 })
-export class VideoListComponent implements OnInit {
+export class VideoListComponent implements OnDestroy{
 
-  itemsPerPage: number = this.videoService.itemsPerPage;
-  allPages: number = this.videoService.allPages;
+  currentPage = 1;
+  lastPage = 1;
   data : any;
-  card: any[] = [];
-  secondes = 0;
- 
-  dataSubject: any;
-  
 
+  pageSubscription: Subscription = new Subscription;
+  
   constructor(private videoService: VideoService) {
-    this.onFetch();
+    this.onFetch(this.currentPage);
   }
 
-  onFetch() {
-    this.videoService.getAll()
-    .subscribe(
-            (response: Video) => {
-            //console.log(response);
-            this.data = response;
-            // this.data = {
-            //   image: response.image,
-            //   title: response.title,
-            //   language: response.language,
-            //   uploaderName: response.uploaderName,
-            //   duration: response.duration
-            // }
-
-            console.log(this.data);
-            
-            this.getData();
-          },
-          (error: string) => {
-            console.log('error : ' + error);
-            
-          });
+  onFetch(page :number) {
+    this.pageSubscription = this.videoService.getAll(this.currentPage).subscribe(res => {
+        this.data = res.data;
+        this.currentPage = res.meta.current_page;    
+        this.lastPage = res.meta.last_page;  
+    });
    }
 
-
-   getData() {
-    this.card = this.data.data;
-    //console.log(this.data.data);
-    
-    
+   ngOnDestroy(): void {
+    this.pageSubscription.unsubscribe();
   }
 
-  ngOnInit() {
-
+  changePage(nb :number) {
+      this.currentPage = nb;
+    this.onFetch(this.currentPage);
   }
-
-
 }
