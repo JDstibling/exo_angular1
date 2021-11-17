@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { TimerPipe } from 'src/app/timer.pipe';
+
 @Component({
   selector: 'app-single-video',
   templateUrl: './single-video.component.html',
@@ -6,7 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class SingleVideoComponent {
 
-  @Input() data: Array<any> = [];
   @Input() image: string = '';
   @Input() title: string = '';
   @Input() views: number = 0;

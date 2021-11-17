@@ -13,6 +13,7 @@ export class VideoListComponent implements OnDestroy{
   currentPage = 1;
   lastPage = 1;
   data : any;
+  card: any;
 
   pageSubscription: Subscription = new Subscription;
   
@@ -23,6 +24,10 @@ export class VideoListComponent implements OnDestroy{
   onFetch(page :number) {
     this.pageSubscription = this.videoService.getAll(this.currentPage).subscribe(res => {
         this.data = res.data;
+        this.card = [];
+        this.data.forEach((element: any) => {
+          this.card.push(element.data);
+        });
         this.currentPage = res.meta.current_page;    
         this.lastPage = res.meta.last_page;  
     });

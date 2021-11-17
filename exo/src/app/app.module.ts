@@ -9,6 +9,7 @@ import { VideoService } from './services/video.service';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginationComponent } from './video/pagination/pagination.component';
+import { TimerPipe } from './timer.pipe';
 
 const appRoutes : Routes = [
   
@@ -25,7 +26,8 @@ const appRoutes : Routes = [
     AppComponent,
     VideoListComponent,
     SingleVideoComponent,
-    PaginationComponent
+    PaginationComponent,
+    TimerPipe
   ],
   imports: [
     BrowserModule,
