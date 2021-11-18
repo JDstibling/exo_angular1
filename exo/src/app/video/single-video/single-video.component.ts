@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TimerPipe } from 'src/app/timer.pipe';
+
 
 @Component({
   selector: 'app-single-video',

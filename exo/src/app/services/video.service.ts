@@ -7,12 +7,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VideoService{
 
-  perPage: number = 5;
+  perPage: number = 8;
 
   constructor(private Http: HttpClient) { }
 
   getAll(currentPage:number){
     return this.Http.get<any>(environment.api.training + '&limit=' + this.perPage + '&page=' + currentPage);
   }
+
 
 }

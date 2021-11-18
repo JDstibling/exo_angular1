@@ -2,7 +2,8 @@
 <div class="main">
     <div class="cards">
         <app-single-video
-        *ngFor="let item of card"
+        *ngFor="let item of card;let i=index;"
+        (click)="showVideo(i)"
         [title]="item.name"
         [image]="item.thumbnails.medium"
         [uploaderName]="item.author.username"

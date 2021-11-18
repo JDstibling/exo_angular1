@@ -1,7 +1,7 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { VideoService } from '../../services/video.service';
-import { Video } from 'src/app/models/Video.model';
 import { Subscription } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-video-list',
@@ -14,6 +14,7 @@ export class VideoListComponent implements OnDestroy{
   lastPage = 1;
   data : any;
   card: any;
+  urlVideo!: string;
 
   pageSubscription: Subscription = new Subscription;
   
@@ -23,15 +24,19 @@ export class VideoListComponent implements OnDestroy{
 
   onFetch(page :number) {
     this.pageSubscription = this.videoService.getAll(this.currentPage).subscribe(res => {
+      console.log(res);
+      
         this.data = res.data;
         this.card = [];
         this.data.forEach((element: any) => {
           this.card.push(element.data);
         });
+        
         this.currentPage = res.meta.current_page;    
         this.lastPage = res.meta.last_page;  
     });
    }
+
 
    ngOnDestroy(): void {
     this.pageSubscription.unsubscribe();
@@ -41,4 +46,10 @@ export class VideoListComponent implements OnDestroy{
       this.currentPage = nb;
     this.onFetch(this.currentPage);
   }
+  
+  showVideo(element:number){
+    this.urlVideo = environment.video_URL.video + this.card[element].hash_id;
+    document.location.href = this.urlVideo;
+  }
+
 }
